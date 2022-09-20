@@ -6,7 +6,6 @@ class PessoaRepository {
     cpf, nome_completo, telefone, email, 
     data_nascimento, sexo, cliente
   }) {
-
     const [row] = await query(`
       INSERT INTO pessoa (id, cpf, nome_completo, telefone, email, data_nascimento, sexo, cliente)
       VALUES($1, $2, $3, $4, $5, $6, $7, $8)

@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS Parceiro (
     nome_fantasia varchar(80) not null,
     inscricao_estadual varchar(9) not null,
     nome_responsavel varchar(80) not null,
+    
     PRIMARY KEY(id)
 );
 
@@ -51,6 +52,7 @@ CREATE TABLE IF NOT EXISTS Usuario (
     senha varchar(8) not null,
     administrador boolean not null,
     farmaceutico boolean not null,
+
     PRIMARY KEY (id)
 );
 
@@ -58,6 +60,7 @@ CREATE TABLE IF NOT EXISTS Consulta (
     id varchar not null,
     data_consulta timestamp not null,
     preco decimal not null,
+
     PRIMARY KEY (id)
 );
 
@@ -65,8 +68,8 @@ CREATE TABLE IF NOT EXISTS Parceiro_Endereco (
     id varchar not null,
     id_endereco varchar not null,
     id_parceiro varchar not null,
-    PRIMARY KEY (id),
 
+    PRIMARY KEY (id),
     CONSTRAINT FK_Endereco_Parceiro FOREIGN KEY (id_endereco) REFERENCES Endereco(id),
     CONSTRAINT FK_Parceiro_Endereco FOREIGN KEY (id_parceiro) REFERENCES Parceiro(id)
 );
@@ -75,6 +78,8 @@ CREATE TABLE IF NOT EXISTS Produto_Parceiro (
     id varchar not null,
     id_produto varchar not null,
     id_parceiro varchar not null,
+
+    PRIMARY KEY(id);
     CONSTRAINT FK_Produto_Parceiro FOREIGN KEY (id_produto) REFERENCES Produto(id),
     CONSTRAINT FK_Parceiro_Produto FOREIGN KEY (id_parceiro) REFERENCES Produto(id)
 );
@@ -84,6 +89,7 @@ CREATE TABLE IF NOT EXISTS Parceiro_Pessoa (
     id_parceiro varchar not null,
     id_pessoa varchar not null,
 
+    PRIMARY KEY(id);
     CONSTRAINT FK_Parceiro_Pessoa FOREIGN KEY (id_parceiro) REFERENCES Parceiro(id),
     CONSTRAINT FK_Pessoa_Parceiro FOREIGN KEY (id_pessoa) REFERENCES Pessoa(id)
 );
@@ -93,6 +99,7 @@ CREATE TABLE IF NOT EXISTS Pessoa_Usuario (
     id_usuario varchar not null,
     id_pessoa varchar not null,
 
+    PRIMARY KEY(id);
     CONSTRAINT FK_Pessoa_Usuario FOREIGN KEY (id_pessoa) REFERENCES Pessoa(id),
     CONSTRAINT FK_Usuario_Pessoa FOREIGN KEY (id_usuario) REFERENCES Usuario(id)
 );
@@ -104,6 +111,7 @@ CREATE TABLE IF NOT EXISTS Cliente_Consulta_Farmaceutico (
     id_cliente varchar not null,
     id_farmaceutico varchar not null,
 
+    PRIMARY KEY(id);
     CONSTRAINT FK_Consulta_Cliente_Farmaceutico FOREIGN KEY (id_consulta) REFERENCES Consulta(id),
     CONSTRAINT FK_Cliente_Consulta_Farmaceutico FOREIGN KEY (id_cliente) REFERENCES Pessoa(id),
     CONSTRAINT FK_Farmaceutico_Cliente_Consulta FOREIGN KEY (id_farmaceutico) REFERENCES Usuario(id)
@@ -114,7 +122,7 @@ CREATE TABLE IF NOT EXISTS Cliente_Endereco (
     id_endereco varchar not null,
     id_cliente varchar not null,
 
+    PRIMARY KEY(id);
     CONSTRAINT FK_Endereco_Cliente FOREIGN KEY (id_endereco) REFERENCES Endereco(id),
-
     CONSTRAINT FK_Cliente_Endereco FOREIGN KEY (id_cliente) REFERENCES Pessoa(id)
 )
